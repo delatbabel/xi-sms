@@ -13,6 +13,11 @@ use Xi\Sms\SmsMessage;
 
 /**
  * Ericsson Ipx SMS Gateway
+ *
+ * This interface implements GatewayInterface and provides an interface
+ * to the Ericsson Ipx SMS Gateway.
+ *
+ * @reference http://www.ericsson.com/res/ourportfolio/pdf/ipx/100907-ipx-service-description.pdf
  */
 class IpxGateway implements GatewayInterface
 {
@@ -35,19 +40,18 @@ class IpxGateway implements GatewayInterface
     protected $client = null;
 
     /**
-     * Url to SOAP wsdl
+     * Url to SOAP wsdl.  What should this be?
+     *
      * @var string
      */
     protected $wsdlUrl = null;
 
     /**
-     *
      * @var string
      */
     protected $username = null;
 
     /**
-     *
      * @var string
      */
     protected $password = null;
@@ -59,6 +63,8 @@ class IpxGateway implements GatewayInterface
     protected $timeout = self::DEFAULT_SOCKET_TIMEOUT;
 
     /**
+     * Constructor
+     *
      * @param string $username
      * @param string $password
      * @param string $wsdlUrl
@@ -68,8 +74,8 @@ class IpxGateway implements GatewayInterface
         $wsdlUrl,
         $username,
         $password,
-        $timeout = self::DEFAULT_SOCKET_TIMEOUT
-    ) {
+        $timeout = self::DEFAULT_SOCKET_TIMEOUT)
+    {
         if (!$wsdlUrl || !$username || !$password) {
             throw new \InvalidArgumentException('Invalid IpxGateway configuration');
         }
@@ -80,6 +86,8 @@ class IpxGateway implements GatewayInterface
     }
 
     /**
+     * Send an SMS message.
+     *
      * @param \Xi\Sms\SmsMessage $message
      * @return boolean true if send was successful for all receivers
      */
@@ -163,6 +171,7 @@ class IpxGateway implements GatewayInterface
 
     /**
      * Evaluate originatingAddress to determine the TON
+     *
      * @param string $from
      * @return string
      * @throws \InvalidArgumentException
@@ -177,6 +186,8 @@ class IpxGateway implements GatewayInterface
     }
 
     /**
+     * Internal send message function.
+     *
      * @param string $from
      * @param string|array $to
      * @param string $body
@@ -207,7 +218,8 @@ class IpxGateway implements GatewayInterface
     }
 
     /**
-     * Check result for response or error
+     * Check result for response or error.
+     *
      * @param mixed $result
      */
     protected function checkResult($result)
@@ -222,6 +234,7 @@ class IpxGateway implements GatewayInterface
 
     /**
      * parse originatingAddress and try to guess the Type Of Number
+     *
      * @param string $sender
      * @return string | null
      */

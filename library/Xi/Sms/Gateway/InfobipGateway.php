@@ -14,6 +14,15 @@ use XMLWriter;
 
 /**
  * Infobip gateway
+ *
+ * This interface implements GatewayInterface and provides an interface
+ * to the Infobip SMS gateway.  Free trial account available but I am unable
+ * to find pricing information on the Infobip web site.  Infobip are based in
+ * the UK.
+ *
+ * @reference http://www.infobip.com/ Company web site.
+ * @reference http://www.infobip.com/messaging/ Messaging web site.
+ * @reference http://developer.infobip.com/home Developer web site.
  */
 class InfobipGateway extends BaseHttpRequestGateway
 {

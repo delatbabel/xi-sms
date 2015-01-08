@@ -13,6 +13,21 @@ use Xi\Sms\SmsMessage;
 use MessageBird\Client;
 use MessageBird\Objects\Message;
 
+/**
+ * MessageBird SMS Gateway
+ *
+ * This interface implements GatewayInterface and provides an interface
+ * to the MessageBird SMS gateway.  The MessageBirdGatewayInterface requires
+ * a vendor module which can be found on composer as messagebird/php-rest-api.
+ * This should be installed along with any other dependencies using
+ * <tt>composer install</tt> or <tt>composer update</tt>.
+ *
+ * @see MessageBird\Client
+ *
+ * @reference https://www.messagebird.com/ web site.
+ * @reference https://www.messagebird.com/en/developers API details
+ * @reference https://www.messagebird.com/en/pricing-sms SMS pricing
+ */
 class MessageBirdGateway implements GatewayInterface
 {
     /**
@@ -25,13 +40,13 @@ class MessageBirdGateway implements GatewayInterface
      */
     private $client;
 
-    public function __construct(
-        $apiKey
-    ) {
+    public function __construct($apiKey) {
         $this->apiKey = $apiKey;
     }
 
     /**
+     * Gets the current MessageBird client interface.
+     *
      * @return Client
      */
     public function getClient()
@@ -44,6 +59,8 @@ class MessageBirdGateway implements GatewayInterface
     }
 
     /**
+     * Sets the MessageBird client interface.
+     *
      * @param Client $client
      */
     public function setClient(Client $client)
@@ -52,6 +69,8 @@ class MessageBirdGateway implements GatewayInterface
     }
 
     /**
+     * Sends a message.
+     *
      * @see GatewayInterface::send
      * @todo Implement a smarter method of sending (batch)
      */

@@ -11,6 +11,12 @@ namespace Xi\Sms\Gateway;
 
 use Xi\Sms\SmsMessage;
 
+/**
+ * SMS Gateway interface
+ *
+ * This interface implements a standardised basic SMS interface.
+ * Every gateway should implement this interface.
+ */
 interface GatewayInterface
 {
     /**

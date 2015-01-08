@@ -12,6 +12,17 @@ namespace Xi\Sms\Gateway;
 use Xi\Sms\SmsMessage;
 use Xi\Sms\SmsException;
 
+/**
+ * Pixie SMS Gateway
+ *
+ * This interface implements GatewayInterface and provides an interface
+ * to the Pixie SMS gateway.  Pixie are based in Sweden and all of their
+ * web site documentation is in Swedish.
+ *
+ * @reference http://www.pixie.se/ web site.
+ * @reference http://www.pixie.se/support-kontakt/ Support and contact page
+ * @reference http://www.pixie.se/priser/ SMS pricing
+ */
 class PixieGateway extends BaseHttpRequestGateway
 {
     /**

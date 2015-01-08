@@ -11,6 +11,13 @@ namespace Xi\Sms;
 
 /**
  * SMS message
+ *
+ * This class encapsulates an SMS message that can be sent out via
+ * the SMS service.
+ *
+ * @example <br />
+ *     $myMessage = new SmsMessage('Hello World', '0400 999 999', array('0411 888 8888')); <br />
+ *     $result = $myService->send($myMessage);
  */
 class SmsMessage
 {
@@ -45,7 +52,10 @@ class SmsMessage
     }
 
     /**
+     * Sets message body
+     *
      * @param string $body
+     * @return void
      */
     public function setBody($body)
     {
@@ -53,6 +63,8 @@ class SmsMessage
     }
 
     /**
+     * Gets message body
+     *
      * @return null|string
      */
     public function getBody()
@@ -64,6 +76,7 @@ class SmsMessage
      * Sets receiver or an array of receivers
      *
      * @param string|array $to
+     * @return void
      */
     public function setTo($to)
     {
@@ -74,6 +87,8 @@ class SmsMessage
     }
 
     /**
+     * Gets receiver array
+     *
      * @return array
      */
     public function getTo()
@@ -82,7 +97,10 @@ class SmsMessage
     }
 
     /**
+     * Adds one receiver
+     *
      * @param string $to
+     * @return void
      */
     public function addTo($to)
     {
@@ -90,6 +108,8 @@ class SmsMessage
     }
 
     /**
+     * Sets From address
+     *
      * @param string $from
      */
     public function setFrom($from)
@@ -98,6 +118,8 @@ class SmsMessage
     }
 
     /**
+     * Gets From address
+     *
      * @return string
      */
     public function getFrom()

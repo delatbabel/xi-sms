@@ -11,6 +11,17 @@ namespace Xi\Sms\Gateway;
 
 use Xi\Sms\SmsMessage;
 
+/**
+ * Clickatell SMS Gateway
+ *
+ * This interface implements GatewayInterface and provides an interface
+ * to the Clickatell SMS gateway.
+ *
+ * @reference https://www.clickatell.com/ web site.
+ * @reference https://www.clickatell.com/apis-scripts/apis/http-s/ API details for the HTTP/S API
+ * @reference https://www.clickatell.com/pricing-and-coverage/message-pricing/ SMS pricing
+ * @reference http://en.wikipedia.org/wiki/Clickatell Wikipedia article
+ */
 class ClickatellGateway extends BaseHttpRequestGateway
 {
     /**

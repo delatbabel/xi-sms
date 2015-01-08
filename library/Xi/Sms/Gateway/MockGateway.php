@@ -21,12 +21,22 @@ class MockGateway implements GatewayInterface
      */
     private $sentMessages = array();
 
+    /**
+     * Sends a message.
+     *
+     * This function actually doesn't send anything, it only stores the messages
+     * internally.
+     *
+     * @see GatewayInterface::send
+     */
     public function send(SmsMessage $message)
     {
         $this->sentMessages[] = $message;
     }
 
     /**
+     * Retrieve the stored messages sent by send().
+     *
      * @return array
      */
     public function getSentMessages()

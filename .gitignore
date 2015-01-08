@@ -2,7 +2,9 @@
 vendor/
 tests/phpunit.xml
 composer.lock
+documents/apigen/
+reports/
 
 # IDEs
 /.idea
-
+.directory
