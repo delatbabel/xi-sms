@@ -44,6 +44,14 @@ class ClickatellGateway extends BaseHttpRequestGateway
      */
     private $endpoint;
 
+    /**
+     * Constructor
+     *
+     * @param string $apiKey
+     * @param string $user
+     * @param string $password
+     * @param string $endpoint
+     */
     public function __construct(
         $apiKey,
         $user,

@@ -40,6 +40,11 @@ class MessageBirdGateway implements GatewayInterface
      */
     private $client;
 
+    /**
+     * Constructor
+     *
+     * @param string $apiKey
+     */
     public function __construct($apiKey) {
         $this->apiKey = $apiKey;
     }

@@ -9,6 +9,7 @@ if [ -z "$1" ]; then
     --source ./library \
     --exclude './library/Xi/Sms/Gateway/Legacy/*' \
     --source ./vendor/messagebird \
+    --source ./vendor/kriswallsmith \
     --destination ./documents/apigen \
     --report ./reports/apigen.xml
 
