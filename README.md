@@ -21,3 +21,7 @@ $msg = new SmsMessage('message', 'sender', 'receiver_msisdn');
 $service->send($msg);
 
 ```
+
+### TODO
+
+Gateway interface for HQSMS: http://www.hqsms.com/

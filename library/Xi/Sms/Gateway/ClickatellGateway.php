@@ -65,7 +65,13 @@ class ClickatellGateway extends BaseHttpRequestGateway
     }
 
     /**
+     * Send a message
+     *
+     * Uses a POST call to a URL like this:
+     * http://api.clickatell.com/http/sendmsg?api_id=APIKEY&user=USERNAME&password=PASSWORD&to=123412341234&text=This+Is+A+Test+Message&from=567567567
+     *
      * @see GatewayInterface::send
+     * @reference https://www.clickatell.com/apis-scripts/apis/http-s/
      * @todo Implement a smarter method of sending (batch)
      */
     public function send(SmsMessage $message)
