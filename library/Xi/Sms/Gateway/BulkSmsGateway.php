@@ -24,7 +24,7 @@ use Xi\Sms\SmsMessage;
  * @reference http://www.bulksms.com/int/w/products-apis.htm SMS APIs
  * @reference http://www.bulksms.com/int/w/eapi-sms-gateway.htm API details for the HTTP to SMS API (EAPI)
  * @reference http://www.bulksms.com/int/w/pricing.htm SMS pricing
- * @reference bulksms.vsms.net/register/ Registration page
+ * @reference http://bulksms.vsms.net/register/ Registration page
  * @reference http://www.bulksms.com/int/docs/eapi/code_samples/php/ PHP code samples
  * @reference http://www.bulksms.com/int/docs/eapi/code_samples/php/sendsms/ Code sample
  */
