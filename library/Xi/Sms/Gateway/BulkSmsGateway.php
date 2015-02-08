@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This file is part of the Xi SMS package.
  *
@@ -19,6 +18,10 @@ use Xi\Sms\SmsMessage;
  *
  * Pricing varies around 3 euro cents per message, free trial account with
  * 5 free credits available. 
+ *
+ * Note that the BulkSMS API supports sending 7, 8 and 16 bit unicode
+ * SMS messages.  This gateway only implements 7 and 16 bit SMS messages
+ * because many carriers, esp. SE Asia, do not support 8 bit messages. 
  *
  * @reference http://www.bulksms.com/int/ web site.
  * @reference http://www.bulksms.com/int/w/products-apis.htm SMS APIs
@@ -143,23 +146,22 @@ class BulkSmsGateway extends BaseHttpRequestGateway
         $url = $this->endpoint;
 
         foreach ($message->getTo() as $to) {
-
             switch($this->bits) {
                 case 7:
                     //
                     // Sending 7-bit message
                     //
-                    $post_body = $this->seven_bit_sms($body, $to);
+                    $post_body = $this->sevenBitSms($body, $to);
                     $this->getClient()->post($url, array(), $post_body);
-                break;
+                    break;
                 
                 case 16:
                     //
                     // Sending unicode message
                     //
-                    $post_body = $this->unicode_sms($body, $to);
+                    $post_body = $this->unicodeSms($body, $to);
                     $this->getClient()->post($url, array(), $post_body);
-                break;
+                    break;
             }
         }
         return true;
@@ -172,15 +174,15 @@ class BulkSmsGateway extends BaseHttpRequestGateway
      * @param string $msisdn
      * @return string
      */
-    protected function seven_bit_sms($message, $msisdn) {
+    protected function sevenBitSms($message, $msisdn) {
         $post_fields = array (
             'username' => $this->username,
             'password' => $this->password,
-            'message'  => $this->character_resolve( $message ),
+            'message'  => $this->characterResolve( $message ),
             'msisdn'   => $msisdn
         );
 
-        return $this->make_post_body($post_fields);
+        return $this->makePostBody($post_fields);
     }
 
     /**
@@ -192,16 +194,16 @@ class BulkSmsGateway extends BaseHttpRequestGateway
      * @param string $msisdn
      * @return string
      */
-    protected function unicode_sms($message, $msisdn) {
+    protected function unicodeSms($message, $msisdn) {
         $post_fields = array (
             'username' => $this->username,
             'password' => $this->password,
-            'message'  => $this->string_to_utf16_hex($message),
+            'message'  => $this->stringToUtf16Hex($message),
             'msisdn'   => $msisdn,
             'dca'      => '16bit'
         );
 
-        return make_post_body($post_fields);
+        return makePostBody($post_fields);
     }
 
     /**
@@ -210,7 +212,7 @@ class BulkSmsGateway extends BaseHttpRequestGateway
      * @param string $body
      * @return string
      */
-    protected function character_resolve($body) {
+    protected function characterResolve($body) {
         $special_chrs = array(
             'Î”'=>'0xD0', 'Î¦'=>'0xDE', 'Î“'=>'0xAC', 'Î›'=>'0xC2', 'Î©'=>'0xDB',
             'Î '=>'0xBA', 'Î¨'=>'0xDD', 'Î£'=>'0xCA', 'Î˜'=>'0xD4', 'Îž'=>'0xB1',
@@ -224,17 +226,16 @@ class BulkSmsGateway extends BaseHttpRequestGateway
 
         $ret_msg = '';
         if( mb_detect_encoding($body, 'UTF-8') != 'UTF-8' ) {
-                        $body = utf8_encode($body);
-                }
-                for ( $i = 0; $i < mb_strlen( $body, 'UTF-8' ); $i++ ) {
-                        $c = mb_substr( $body, $i, 1, 'UTF-8' );
-                        if( isset( $special_chrs[ $c ] ) ) {
-                                $ret_msg .= chr( $special_chrs[ $c ] );
-                        }
-                        else {
-                                $ret_msg .= $c;
-                        }
-                }
+           	$body = utf8_encode($body);
+        }
+        for ( $i = 0; $i < mb_strlen( $body, 'UTF-8' ); $i++ ) {
+            $c = mb_substr( $body, $i, 1, 'UTF-8' );
+            if( isset( $special_chrs[ $c ] ) ) {
+                $ret_msg .= chr( $special_chrs[ $c ] );
+            } else {
+                $ret_msg .= $c;
+            }
+        }
         return $ret_msg;
     }
 
@@ -244,7 +245,7 @@ class BulkSmsGateway extends BaseHttpRequestGateway
      * @param string $body
      * @return string
      */
-    protected function string_to_utf16_hex( $string ) {
+    protected function stringToUtf16Hex( $string ) {
         return bin2hex(mb_convert_encoding($string, "UTF-16", "UTF-8"));
     }
 
@@ -254,10 +255,10 @@ class BulkSmsGateway extends BaseHttpRequestGateway
      * @param array $post_fields
      * @return string
      */
-    protected function make_post_body($post_fields) {
-        $stop_dup_id = $this->make_stop_dup_id();
+    protected function makePostBody($post_fields) {
+        $stop_dup_id = $this->makeStopDupId();
         if ($stop_dup_id > 0) {
-            $post_fields['stop_dup_id'] = $this->make_stop_dup_id();
+            $post_fields['stop_dup_id'] = $this->makeStopDupId();
         }
         $post_body = '';
         foreach( $post_fields as $key => $value ) {
@@ -285,8 +286,7 @@ class BulkSmsGateway extends BaseHttpRequestGateway
      *
      * @return integer
      */
-    protected function make_stop_dup_id() {
+    protected function makeStopDupId() {
         return 0;
     }
-
 }
