@@ -118,13 +118,12 @@ class BulkSmsGateway extends BaseHttpRequestGateway
      * @param integer $port should be 80 or 5567
      * @param integer $bits should be 7 or 16 (unicode)
      */
-     */
     public function __construct(
         $username,
         $password,
         $endpoint = 'http://bulksms.vsms.net/eapi/submission/send_sms/2/2.0',
         $port = 80,
-        $bits = 7,
+        $bits = 7
     ) {
         $this->username = $username;
         $this->password = $password;

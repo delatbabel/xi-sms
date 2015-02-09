@@ -8,3 +8,7 @@ reports/
 # IDEs
 /.idea
 .directory
+
+# Docs and test
+/dirlist.*
+/documents/
