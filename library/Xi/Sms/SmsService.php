@@ -40,7 +40,7 @@ class SmsService
     /**
      * @var FilterInterface[]
      */
-    private $filters = [];
+    private $filters = array();
 
     /**
      * Constructor
